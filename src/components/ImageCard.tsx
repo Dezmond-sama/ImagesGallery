@@ -61,19 +61,25 @@ const ImageCard = ({ photo, width }: Props) => {
     //   thumbnailType: 6,
     //   app1Offset: 6
     // }
-    const height = Math.ceil(
-        (width * (photo.exif?.imageSize?.height ?? 1)) /
-            (photo.exif?.imageSize?.width ?? 1)
-    );
+    const ratio =
+        (photo.exif?.imageSize?.height ?? 1) /
+        (photo.exif?.imageSize?.width ?? 1);
+    const height = Math.ceil(width * ratio);
+    const spans = Math.floor(height / 10);
 
     return (
-        <Image
-            key={photo.src}
-            src={photo.src}
-            alt={"Photo"}
-            width={width}
-            height={height}
-        />
+        <div className="photo-card" style={{ gridRow: `span ${spans}` }}>
+            <div className="photo-card__image-container">
+                <Image
+                    key={photo.src}
+                    src={photo.src}
+                    alt={"Photo"}
+                    sizes={`${width}px`}
+                    width={width}
+                    height={height}
+                />
+            </div>
+        </div>
     );
 };
 
