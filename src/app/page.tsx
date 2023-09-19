@@ -13,7 +13,7 @@ type Props = {
 const Home = async ({ searchParams }: Props) => {
     const page = Math.max(1, stringToInt(searchParams.page, 1));
     const limit = clamp(
-        stringToInt(searchParams.limit, 10),
+        stringToInt(searchParams.limit, 12),
         1,
         getFilesCount()
     );

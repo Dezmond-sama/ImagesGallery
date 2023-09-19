@@ -7,25 +7,28 @@ export type PhotoData = {
     exif?: ExifData | undefined;
 };
 export const readFiles = async (
-    imagesPerPage?: number,
-    page?: number
+    imagesPerPage: number,
+    page: number
 ): Promise<PhotoData[]> => {
     const files: string[] = fs.readdirSync(testFolder);
-    const currImagesPerPage = (imagesPerPage ?? files.length) || 10;
-    const currPage = Math.max(1, page ?? 1);
+    const currImagesPerPage = imagesPerPage || files.length;
+    const currPage = Math.max(1, page);
 
-    return await Promise.all(
-        files
-            .slice(
-                currImagesPerPage * (currPage - 1),
-                currImagesPerPage * currPage
-            )
-            .map((f): PhotoData => {
-                const imgbuffer = fs.readFileSync(testFolder + f);
-                const parser = ExifParserFactory.create(imgbuffer);
-                return { src: `/images/${f}`, exif: parser.parse() };
-            })
-    );
+    return files
+        .map((f): PhotoData => {
+            const imgbuffer = fs.readFileSync(testFolder + f);
+            const parser = ExifParserFactory.create(imgbuffer);
+            return { src: `/images/${f}`, exif: parser.parse() };
+        })
+        .sort(
+            (p1, p2) =>
+                (p1.exif?.tags?.DateTimeOriginal ?? 0) -
+                (p2.exif?.tags?.DateTimeOriginal ?? 0)
+        )
+        .slice(
+            currImagesPerPage * (currPage - 1),
+            currImagesPerPage * currPage
+        );
 };
 export const getFilesCount = (): number => {
     return fs.readdirSync(testFolder).length;

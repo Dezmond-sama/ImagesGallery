@@ -3,8 +3,8 @@ import ImageCard from "./ImageCard";
 
 type Props = {
     imageWidth?: number;
-    page?: number;
-    limit?: number;
+    page: number;
+    limit: number;
 };
 const Gallery = async ({ imageWidth, page, limit }: Props) => {
     const files: PhotoData[] = await readFiles(limit, page);
