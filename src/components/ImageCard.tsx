@@ -78,6 +78,9 @@ const ImageCard = ({ photo, width }: Props) => {
                     width={width}
                     height={height}
                 />
+                <div className="photo-card__caption">
+                    <p>test</p>
+                </div>
             </div>
         </div>
     );

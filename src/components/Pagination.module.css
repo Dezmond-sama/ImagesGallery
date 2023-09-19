@@ -1,0 +1,15 @@
+.pagination {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.link {
+    padding: 10px;
+}
+
+.spacer {
+    flex: 0 0 30px;
+    text-align: center;
+}
