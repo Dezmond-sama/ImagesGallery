@@ -23,7 +23,7 @@
     overflow: hidden;
     border-radius: 10px;
 }
-.photo-card__caption {
+.photo-card__info {
     height: 0px;
     transition: height 0.3s 0.5s ease-out;
     overflow: hidden;
@@ -33,10 +33,25 @@
     bottom: 0;
     background-color: #0008;
     color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .photo-card:hover {
     opacity: 0.9;
 }
-.photo-card:hover .photo-card__caption {
+.photo-card:hover .photo-card__info {
     height: 100px;
+}
+.photo-card-info__line {
+    display: flex;
+    gap: 15px;
+    padding: 0 10px;
+}
+.photo-card-info-line__elem {
+    display: flex;
+    align-items: center;
+}
+.photo-card-info-line__elem img {
+    padding-right: 5px;
 }
